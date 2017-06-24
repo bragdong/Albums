@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<h1>Display using Jtwig</h1>
+
+{% for a in albums %}
+<div>
+
+  <table width="300" style="border:1pt solid black">
+    <tr>
+      <td align="left"><b>Album ID:</b></td>
+      <td align="right"> {{a.albumID}} </td>
+    </tr>
+    <tr>
+      <td align="left"><b>Album Title:</b></td>
+      <td align="right"> {{a.title}} </td>
+    </tr>
+    <tr>
+      <td align="left"><b>Artist:</b></td>
+      <td align="right"> {{a.artist}} </td>
+    </tr>
+    <tr>
+      <td align="left"><b>Album Genre:</b></td>
+      <td align="right"> {{a.genre}} </td>
+    </tr>
+  </table>
+
+
+</div>
+{% endfor %} 
+
+</body>
+</html>

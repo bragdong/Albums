@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<!--    <link rel="stylesheet" type="text/css" href="styles.css">  -->
+</head>
+<body>
+  <h1>
+    Create Album
+  </h1>
+
+  <div>
+
+  <table>
+    <tr>
+      <td align="right"><b>Title:</b></td>
+      <td align="left"><input type="text"  id="title" /></td>
+    </tr>
+    <tr>
+      <td align="right"><b>Artist:</b></td>
+      <td align="left"><input type="text"  id="artist" /></td>
+    </tr>
+    <tr>
+      <td align="right"><b>Genre:</b></td>
+      <td align="left"><input type="text"  id="genre" /></td>
+    </tr>    
+  </table>
+
+    <div>
+      <button id="submit_button"> Create Album </button>
+    </div>
+
+    <div id="msg">
+
+    </div>
+
+  </div>
+
+<script>
+// AJAX posting x-www-form-urlencoded
+var button = document.getElementById('submit_button');
+var titleID = document.getElementById('title');
+var artistID = document.getElementById('artist');
+var genreID = document.getElementById('genre');
+
+var p = document.createElement('p');
+var div = document.getElementById('msg');
+
+button.onclick = function () {
+var title = titleID.value;
+var artist = artistID.value;
+var genre = genreID.value;
+console.log("title = "+title);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/albumInput_submit');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function() {
+    	if (xhr.status === 200) {
+    		div.appendChild(p);
+    		p.innerHTML = xhr.responseText;
+    		setTimeout(function() {
+    			titleID.value = "";
+    			artistID.value = "";
+    			genreID.value = "";
+    			}, 2000);
+        } else if (xhr.status !== 200) {
+            alert('Request failed.  Returned status of ' + xhr.status);
+        }
+    };
+    var body = 'title=' + encodeURIComponent(title) + '&artist=' + encodeURIComponent(artist) + '&genre=' + encodeURIComponent(genre);
+    console.log(body);
+    xhr.send(body);
+};
+</script>
+</body>
+</html>
